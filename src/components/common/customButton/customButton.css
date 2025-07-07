@@ -1,0 +1,28 @@
+.custom-radio-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid #cfdbe8;
+  padding: 1px 15px;
+  height: 2.75rem;
+  color: #0d141c;
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+  margin-right: 10px;
+}
+
+.invisible-radio {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.checked {
+  border-width: 3px;
+  border-color: #0c7ff2;
+}

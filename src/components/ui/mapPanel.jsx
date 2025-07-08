@@ -1,11 +1,14 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Flex, TextField } from "@radix-ui/themes";
-import YandexMap from "../../services/YandexMap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CustomMap from "../common/customMap/customMap";
+
+import getLocation from "../../services/getLocation.service";
 
 const MapPanel = () => {
   const [value, setValue] = useState("");
   const [search, setSearch] = useState("");
+  const [coordinates, setCoordinates] = useState([55.76, 37.64]);
   function handleChange(e) {
     setValue(e.target.value);
   }
@@ -14,6 +17,19 @@ const MapPanel = () => {
       setSearch(value);
     }
   }
+  function removeCoordinates() {
+    setCoordinates(null);
+  }
+
+  useEffect(() => {
+    if (search) {
+      getLocation(search).then((result) => {
+        const { lat, lon } = result[0];
+        setCoordinates([+lat, +lon]);
+      });
+    }
+  }, [search]);
+
   return (
     <Flex direction={"column"} justify={"center"}>
       <div style={{ width: "900px", position: "relative" }}>
@@ -33,6 +49,7 @@ const MapPanel = () => {
             width: "300px",
             backgroundColor: "white",
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+            zIndex: "999",
           }}
         >
           <TextField.Slot>
@@ -40,7 +57,7 @@ const MapPanel = () => {
           </TextField.Slot>
         </TextField.Root>
 
-        <YandexMap searchQuery={search} />
+        <CustomMap coordinates={coordinates} remove={removeCoordinates} />
       </div>
     </Flex>
   );

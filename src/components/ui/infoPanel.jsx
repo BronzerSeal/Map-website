@@ -117,7 +117,7 @@ const InfoPanel = ({ setCoordinates, setControls }) => {
 
       <Heading>Map markers</Heading>
       <br />
-      <ZoneComponent />
+      <ZoneComponent setCoordinates={setCoordinates} />
     </Flex>
   );
 };

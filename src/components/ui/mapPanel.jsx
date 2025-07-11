@@ -2,13 +2,13 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Flex, TextField } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import CustomMap from "../common/customMap/customMap";
-
 import getLocation from "../../services/getLocation.service";
 
-const MapPanel = () => {
+const MapPanel = ({ coordinates, setCoordinates, controls }) => {
   const [value, setValue] = useState("");
   const [search, setSearch] = useState("");
-  const [coordinates, setCoordinates] = useState([55.76, 37.64]);
+  const [inputColor, setInputColor] = useState("");
+
   function handleChange(e) {
     setValue(e.target.value);
   }
@@ -24,8 +24,15 @@ const MapPanel = () => {
   useEffect(() => {
     if (search) {
       getLocation(search).then((result) => {
-        const { lat, lon } = result[0];
-        setCoordinates([+lat, +lon]);
+        if (result.length > 0) {
+          const { lat, lon } = result[0];
+          setCoordinates([+lat, +lon]);
+          setValue("");
+          setInputColor("");
+        } else {
+          setValue("Not found");
+          setInputColor("red");
+        }
       });
     }
   }, [search]);
@@ -40,12 +47,12 @@ const MapPanel = () => {
           value={value}
           onChange={handleChange}
           onKeyDown={handleSearch}
+          color={inputColor}
           style={{
             position: "absolute",
             top: "10px",
             left: "50%",
             transform: "translateX(-50%)",
-            zIndex: 10,
             width: "300px",
             backgroundColor: "white",
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
@@ -53,11 +60,15 @@ const MapPanel = () => {
           }}
         >
           <TextField.Slot>
-            <MagnifyingGlassIcon height="16" width="16" />
+            <MagnifyingGlassIcon color="gray" height="16" width="16" />
           </TextField.Slot>
         </TextField.Root>
 
-        <CustomMap coordinates={coordinates} remove={removeCoordinates} />
+        <CustomMap
+          coordinates={coordinates}
+          remove={removeCoordinates}
+          controls={controls}
+        />
       </div>
     </Flex>
   );

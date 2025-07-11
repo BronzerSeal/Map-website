@@ -2,14 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "@radix-ui/themes/styles.css";
 import App from "./App";
-import { Theme } from "@radix-ui/themes";
 import "./index.css";
+import { Theme } from "@radix-ui/themes";
+import { ThemeProvider } from "next-themes";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Theme style={{ background: "#f7fafc", fontFamily: "Space Grotesk" }}>
-      <App />
-    </Theme>
+    <ThemeProvider attribute="class">
+      <Theme style={{ fontFamily: "Space Grotesk" }}>
+        <App />
+      </Theme>
+    </ThemeProvider>
   </React.StrictMode>
 );

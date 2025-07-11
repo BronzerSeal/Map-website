@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./customMap.css";
 
-const CustomMap = ({ coordinates, remove }) => {
+const CustomMap = ({ coordinates, remove, controls }) => {
   const MapUpdater = ({ coordinates }) => {
     const map = useMap();
 
@@ -13,6 +13,31 @@ const CustomMap = ({ coordinates, remove }) => {
         remove();
       }
     }, [coordinates]);
+
+    return null;
+  };
+
+  const MapSettingsUpdater = ({ isDoubleClick, maxZoom, isScrollZoom }) => {
+    const map = useMap();
+
+    useEffect(() => {
+      if (map) {
+        if (isDoubleClick) {
+          map.doubleClickZoom.enable();
+        } else {
+          map.doubleClickZoom.disable();
+        }
+
+        if (isScrollZoom) {
+          map.scrollWheelZoom.enable();
+        } else {
+          map.scrollWheelZoom.disable();
+        }
+
+        map.options.scrollWheelZoom = isScrollZoom;
+        map.options.maxZoom = maxZoom;
+      }
+    }, [map, isDoubleClick, maxZoom, isScrollZoom]);
 
     return null;
   };
@@ -27,11 +52,20 @@ const CustomMap = ({ coordinates, remove }) => {
     });
   }, []);
 
+  const isdoubleClickControlsChecked = controls.includes("1");
+  const isStreetViewChecked = controls.includes("2");
+  const isScrollWheelZoom = controls.includes("3");
+
   return (
     <MapContainer center={coordinates} zoom={10} style={{ height: "785px" }}>
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <MapSettingsUpdater
+        isDoubleClick={isdoubleClickControlsChecked}
+        maxZoom={isStreetViewChecked ? 18 : 16}
+        isScrollZoom={isScrollWheelZoom}
       />
       <MapUpdater coordinates={coordinates} />
     </MapContainer>

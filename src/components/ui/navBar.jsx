@@ -1,14 +1,23 @@
 import { Avatar, Flex, Link, Text } from "@radix-ui/themes";
-import logoImg from "../../img/logo.png";
+import logoImgLight from "../../img/logoLight.png";
+import logoImgDark from "../../img/logoDark.png";
+import { useTheme } from "next-themes";
 
 const NavBar = () => {
+  const { theme } = useTheme();
   return (
     <>
       <Flex justify={"between"} align={"center"} height={"65px"}>
         <Flex justify={"center"} align={"center"} display={"inline-flex"}>
           <img
             style={{ margin: "0px 20px 0px 15px" }}
-            src={logoImg}
+            src={
+              theme === "light"
+                ? logoImgLight
+                : theme === "dark"
+                ? logoImgDark
+                : logoImgLight
+            }
             alt="Logo"
           />
           <Text weight={"bold"} size={"4"}>

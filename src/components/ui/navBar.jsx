@@ -31,7 +31,7 @@ const NavBar = () => {
             style={{ textDecoration: "none" }}
             color="gray"
             highContrast
-            href="#"
+            href="/"
           >
             Home
           </Link>
@@ -51,7 +51,7 @@ const NavBar = () => {
             style={{ textDecoration: "none" }}
             color="gray"
             highContrast
-            href="#"
+            href="/pricing"
           >
             Pricing
           </Link>

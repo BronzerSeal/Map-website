@@ -1,0 +1,27 @@
+.summary-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.summary-text {
+  flex: 1;
+}
+
+.icon {
+  margin-bottom: 5px;
+}
+
+.custom-accordion {
+  border: 1px solid #dee0e3;
+  width: 1010px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.summary-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}

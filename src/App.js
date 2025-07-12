@@ -1,31 +1,20 @@
-import { Container, Flex } from "@radix-ui/themes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainPage from "./components/page/mainPage";
 import NavBar from "./components/ui/navBar";
-import InfoPanel from "./components/ui/infoPanel";
-import MapPanel from "./components/ui/mapPanel";
-import { useState } from "react";
+import PricingPage from "./components/page/pricingPage";
 
 function App() {
-  const [coordinates, setCoordinates] = useState([55.76, 37.64]);
-  const [controls, setControls] = useState(["1", "2", "3"]);
-
   return (
     <>
       <NavBar />
       <hr />
       <br />
-      <Container>
-        <Flex width={"1220px"} justify={"between"}>
-          <InfoPanel
-            setCoordinates={setCoordinates}
-            setControls={setControls}
-          />
-          <MapPanel
-            coordinates={coordinates}
-            setCoordinates={setCoordinates}
-            controls={controls}
-          />
-        </Flex>
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

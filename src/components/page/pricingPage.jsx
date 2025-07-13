@@ -1,7 +1,10 @@
-import { Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Button, Container, Flex, Heading, Link, Text } from "@radix-ui/themes";
 import PriceCard from "../common/priceCard";
 import PriceQuestion from "../common/priceQuestion/priceQuestions";
-import { cardsData, questionsData } from "../../services/getData.service";
+import {
+  cardsData,
+  pricingQuestionsData,
+} from "../../services/getData.service";
 
 const PricingPage = () => {
   return (
@@ -22,7 +25,7 @@ const PricingPage = () => {
           Frequently Asked Questions
         </Heading>
         <Flex direction={"column"} gap={"3"}>
-          {questionsData.map((question, index) => (
+          {pricingQuestionsData.map((question, index) => (
             <PriceQuestion key={index} data={question} />
           ))}
         </Flex>
@@ -51,7 +54,14 @@ const PricingPage = () => {
               mb={"3"}
               style={{ width: "130px" }}
             >
-              Get started
+              <Link
+                color="gray"
+                highContrast
+                href="/"
+                style={{ textDecoration: "none" }}
+              >
+                Get started
+              </Link>
             </Button>
           </Flex>
 

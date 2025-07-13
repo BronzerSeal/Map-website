@@ -70,7 +70,12 @@ const ZoneComponent = ({ setCoordinates }) => {
                     <Text as="div" size="2" weight="bold">
                       {location.name}
                     </Text>
-                    <TrashIcon onClick={() => deleteMarker(index)} />
+                    <TrashIcon
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteMarker(index);
+                      }}
+                    />
                   </Flex>
                 </Card>
               </Box>

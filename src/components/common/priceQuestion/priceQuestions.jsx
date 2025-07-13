@@ -3,7 +3,7 @@ import "./priceQuestion.css";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { useState, useRef, useEffect } from "react";
 
-const PriceQuestion = ({ data }) => {
+const PriceQuestion = ({ data, padding = "20px" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef(null);
   const [height, setHeight] = useState(0);
@@ -15,7 +15,7 @@ const PriceQuestion = ({ data }) => {
   }, [isOpen]);
 
   return (
-    <div className="custom-accordion">
+    <div className="custom-accordion" style={{ padding: padding }}>
       <div
         className="summary-container"
         onClick={() => setIsOpen((prev) => !prev)}

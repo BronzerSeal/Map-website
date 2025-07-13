@@ -41,9 +41,9 @@ const NavBar = () => {
             style={{ textDecoration: "none" }}
             color="gray"
             highContrast
-            href="#"
+            href="/places"
           >
-            Templates
+            Places
           </Link>
           <Link
             mr="5"
@@ -61,7 +61,7 @@ const NavBar = () => {
             style={{ textDecoration: "none" }}
             color="gray"
             highContrast
-            href="#"
+            href="/help"
           >
             Help
           </Link>
